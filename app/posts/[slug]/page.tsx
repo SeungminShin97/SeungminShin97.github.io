@@ -5,6 +5,7 @@ import { BlogShell } from "@/components/blog-shell";
 // 서버 댓글 기능을 붙일 때 다시 사용합니다.
 // import { CommentsPreview } from "@/components/comments-preview";
 import { RightRail } from "@/components/right-rail";
+import { TagLinks } from "@/components/tag-links";
 import { formatFullDate } from "@/lib/format";
 import { getAllPosts, getPostBySlug } from "@/lib/markdown";
 
@@ -68,11 +69,7 @@ export default function PostPage({ params }: Props) {
             </div>
             <div className="inline-meta tag-inline detail-tags">
               <Tags size={18} />
-              {metadata.tags.map((tag) => (
-                <a key={tag} href={`/tags/${encodeURIComponent(tag)}/`}>
-                  {tag}
-                </a>
-              ))}
+              <TagLinks tags={metadata.tags} />
             </div>
           </footer>
         </header>

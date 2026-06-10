@@ -274,7 +274,19 @@ textarea {
 }
 
 .post-card {
+  position: relative;
   overflow: hidden;
+}
+
+.post-card-cover-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.post-card a:not(.post-card-cover-link) {
+  position: relative;
+  z-index: 2;
 }
 
 .article-header {
@@ -329,6 +341,17 @@ textarea {
   line-height: 1;
 }
 
+.article-category a {
+  transition: box-shadow 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.article-category a:hover,
+.article-category a:focus-visible {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.16);
+  filter: saturate(1.08) brightness(1.02);
+  transform: translateY(-1px);
+}
+
 .article-title-wrapper {
   display: grid;
   gap: 6px;
@@ -374,13 +397,25 @@ textarea {
 .tag-inline a,
 .tag-row a,
 .tag-row span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 2px 7px;
+  border-radius: 4px;
   color: var(--card-text-color-tertiary);
   font-size: 1.36rem;
+  text-decoration: none;
+  transition: background 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .tag-inline a:hover,
-.tag-row a:hover {
+.tag-inline a:focus-visible,
+.tag-row a:hover,
+.tag-row a:focus-visible {
+  background: var(--card-background-selected);
+  box-shadow: var(--shadow-l1);
   color: var(--accent-color);
+  transform: translateY(-1px);
 }
 
 .right-rail {
@@ -524,10 +559,15 @@ textarea {
   box-shadow: var(--shadow-l1);
   color: var(--card-text-color-main);
   font-size: 1.32rem;
+  transition: background 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
-.tag-cloud-tags a:hover {
+.tag-cloud-tags a:hover,
+.tag-cloud-tags a:focus-visible {
+  background: var(--card-background-selected);
+  box-shadow: var(--shadow-l2);
   color: var(--accent-color);
+  transform: translateY(-2px);
 }
 
 .section-heading,
@@ -614,8 +654,6 @@ textarea {
 
 .detail-tags a {
   color: var(--card-text-color-secondary);
-  text-decoration: underline;
-  text-underline-offset: 3px;
 }
 
 .article-content {

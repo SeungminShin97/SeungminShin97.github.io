@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Hash, Infinity, Search, Tag } from "lucide-react";
 import type { ReactNode } from "react";
+import { TagLinks } from "@/components/tag-links";
 import { getCategoryCounts, getYearCounts } from "@/lib/archive";
 import type { Post } from "@/lib/markdown";
+import { archiveYearPath } from "@/lib/routes";
 
 type RightRailProps = {
   posts: Post[];
@@ -40,7 +42,7 @@ export function RightRail({ posts, tags, activePost }: RightRailProps) {
         <WidgetHeading icon={<Infinity size={22} />} title="아카이브" href="/archives/" />
         <div className="widget-box widget-archive-list">
           {years.map(({ name, count }) => (
-            <Link href={`/archives/#${name}`} key={name}>
+            <Link href={archiveYearPath(name)} key={name}>
               <span className="year">{name}</span>
               <span className="count">{count}</span>
             </Link>
@@ -51,22 +53,14 @@ export function RightRail({ posts, tags, activePost }: RightRailProps) {
       <section className="widget plain-widget tag-cloud-widget">
         <WidgetHeading icon={<Hash size={22} />} title="카테고리" />
         <div className="tag-cloud-tags">
-          {categories.map(({ name }) => (
-            <Link href={`/tags/${encodeURIComponent(name)}/`} key={name}>
-              {name}
-            </Link>
-          ))}
+          <TagLinks tags={categories.map(({ name }) => name)} />
         </div>
       </section>
 
       <section className="widget plain-widget tag-cloud-widget">
         <WidgetHeading icon={<Tag size={22} />} title="태그" />
         <div className="tag-cloud-tags">
-          {tags.map((tag) => (
-            <Link key={tag} href={`/tags/${encodeURIComponent(tag)}/`}>
-              {tag}
-            </Link>
-          ))}
+          <TagLinks tags={tags} />
         </div>
       </section>
     </div>

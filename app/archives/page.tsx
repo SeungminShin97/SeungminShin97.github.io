@@ -6,6 +6,7 @@ import { groupPostsByYear } from "@/lib/archive";
 import { formatFullDate } from "@/lib/format";
 import { getAllPosts, getAllTags } from "@/lib/markdown";
 import { projects } from "@/lib/projects";
+import { postPath } from "@/lib/routes";
 
 export const metadata = {
   title: "아카이브"
@@ -49,7 +50,7 @@ export default function ArchivesPage() {
             <ol className="archive-post-list">
               {items.map((post) => (
                 <li key={post.slug}>
-                  <Link href={`/posts/${post.slug}/`} className="archive-post-link">
+                  <Link href={postPath(post.slug)} className="archive-post-link">
                     <div className="archive-post-body">
                       <h3>{post.metadata.title}</h3>
                       <p>{post.metadata.description}</p>
